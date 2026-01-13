@@ -29,7 +29,7 @@ const PostCard = ({
 
 
         const patchLike = async()=>{
-            const response = await fetch(`http://localhost:3000/posts/${postId}/like`,{
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts/${postId}/like`,{
                 method: "PATCH",
                 headers:{
                     Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const PostCard = ({
             await response.json();
             
             // Refetch all posts to update the feed
-            const postsResponse = await fetch(`http://localhost:3000/posts`,{
+            const postsResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts`,{
                 method: "GET",
                 headers:{
                     Authorization: `Bearer ${token}`
@@ -54,7 +54,7 @@ const PostCard = ({
             // console.log("entered the patch comment")
             if(!commentText.trim()) return; //prevent empty comments
             // console.log("patch sent")
-            await fetch(`http://localhost:3000/posts/${postId}/comment`,{
+            await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts/${postId}/comment`,{
                 method: "PATCH",
                 headers:{
                     Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ const PostCard = ({
             });
             // console.log("patch done")
             // Refetch all posts to update comments
-            const postsResponse = await fetch(`http://localhost:3000/posts`,{
+            const postsResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts`,{
                 method: "GET",
                 headers:{
                     Authorization: `Bearer ${token}`
@@ -91,7 +91,7 @@ const PostCard = ({
         <p className="text-sm">{description}</p>
         {/* image */}
         <img
-        src={`http://localhost:3000/assets/${picturePath}`}
+        src={`${import.meta.env.VITE_API_BASE_URL}/assets/${picturePath}`}
         alt="post"
         className="rounded-xl w-full object-cover"
         />

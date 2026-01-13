@@ -12,7 +12,7 @@ const ProfileFriends = ({user}) => {
     
     const getFriends = async()=>{
         try {
-            const response = await fetch(`http://localhost:3000/users/${user._id}/friends`,{
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${user._id}/friends`,{
                 method: "GET",
                 headers: {
                     Authorization : `Bearer ${token}`

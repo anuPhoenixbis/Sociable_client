@@ -17,7 +17,7 @@ const Feed = ({user, isProfile=false}) => {
     // else : fetch all posts
 
     const getPosts = async()=>{
-        const response = await fetch(`http://localhost:3000/posts`,{
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts`,{
             method: "GET",
             headers:{
                 Authorization: `Bearer ${token}`
@@ -30,7 +30,7 @@ const Feed = ({user, isProfile=false}) => {
     const getUserPosts = async()=>{
       console.log("get user posts start")
       console.log(`userid ${user._id}`)
-        const response = await fetch(`http://localhost:3000/posts/${user._id}/posts`,{
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts/${user._id}/posts`,{
             method: "GET",
             headers:{
                 Authorization: `Bearer ${token}`

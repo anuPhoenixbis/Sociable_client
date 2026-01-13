@@ -30,7 +30,7 @@ const CreatePost = ({
             formData.append("picturePath", image.name);
         }
         // console.log("data received")
-        const response = await fetch(`http://localhost:3000/posts`, {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/posts`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
             body: formData,
@@ -46,7 +46,7 @@ const CreatePost = ({
     <div className='card h-30 rounded-xl bg-transparent p-4 space-y-4'>
         {/* Input section */}
         <div className="flex items-center gap-3">
-            <img src={`http://localhost:3000/assets/${picturePath}`}  className='rounded-full h-12 w-12 object-cover ml-8'/>
+            <img src={`${import.meta.env.VITE_API_BASE_URL}/assets/${picturePath}`}  className='rounded-full h-12 w-12 object-cover ml-8'/>
             <input type="text" placeholder="What's on your mind..." onChange={(e)=>setPost(e.target.value)} value={post} className="input input-bordered w-full rounded-full bg-base-200"/>
             {isImage && (
                 // dropzone for image

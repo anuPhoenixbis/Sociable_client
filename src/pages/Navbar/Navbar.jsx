@@ -79,7 +79,7 @@ const Navbar = () => {
                       <div className="w-10 rounded-full">
                         <img
                           alt="profile"
-                          src={`http://localhost:3000/assets/${user.picturePath}`} />
+                          src={`${import.meta.env.VITE_API_BASE_URL}/assets/${user.picturePath}`} />
                       </div>
                     </div>
                     <ul

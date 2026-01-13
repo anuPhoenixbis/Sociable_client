@@ -21,7 +21,7 @@ const ProfileView = ({
     <div className="card bg-base-300 h-72 p-4 space-y-4 rounded-selector">
         {/* profile */}
         <div className="flex items-center gap-4">
-            <img src={`http://localhost:3000/assets/${picturePath}`} className="rounded-full h-16 w-16 object-cover" />
+            <img src={`${import.meta.env.VITE_API_BASE_URL}/assets/${picturePath}`} className="rounded-full h-16 w-16 object-cover" />
             <div>
                 <h4 className="mt-2 font-semibold">{firstName} {lastName}</h4>
                 <p className="text-sm text-base-content/60">

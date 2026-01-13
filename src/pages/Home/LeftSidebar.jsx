@@ -23,7 +23,7 @@ const LeftSidebar = () => {
     <div className="card bg-base-300 h-82 p-4 space-y-4 rounded-selector">
         {/* profile */}
         <div className="flex items-center gap-4">
-            <img src={`http://localhost:3000/assets/${picturePath}`} className="rounded-full h-16 w-16 object-cover" />
+            <img src={`${import.meta.env.VITE_API_BASE_URL}/assets/${picturePath}`} className="rounded-full h-16 w-16 object-cover" />
             <div>
                 <h4 className="mt-2 font-semibold">{firstName} {lastName}</h4>
                 <p className="text-sm text-base-content/60">
@@ -49,7 +49,7 @@ const LeftSidebar = () => {
 
         {/* to view profile */}
         {/* later we should navigate to the profile from here */}
-        <button className="btn btn-sm btn-outline btn-info w-full" onClick={()=>navigate(`http://localhost:3000/profile/${user._id}`)}>View Profile</button>
+        <button className="btn btn-sm btn-outline btn-info w-full" onClick={()=>navigate(`${import.meta.env.VITE_API_BASE_URL}/profile/${user._id}`)}>View Profile</button>
 
 
     </div>

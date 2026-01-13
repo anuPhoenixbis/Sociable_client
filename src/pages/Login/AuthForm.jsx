@@ -53,7 +53,7 @@ export default function AuthForm ({ type='login', children }) {
     formData.append('picturePath',values.picture.name);//appending the image manually
     
     const savedUserResponse = await fetch(//fetch call
-        "http://localhost:3000/auth/register",{
+        `${import.meta.env.VITE_API_BASE_URL}/auth/register`,{
             method: "POST",
             body: formData
         }
@@ -69,7 +69,7 @@ export default function AuthForm ({ type='login', children }) {
     const login = async(values,onSubmitProps)=>{
         
         const loggedInResponse = await fetch(//fetch call
-            "http://localhost:3000/auth/login",{
+            `${import.meta.env.VITE_API_BASE_URL}/auth/login`,{
                 method: "POST",
                 body: JSON.stringify(values),
                 headers: {"Content-Type":"application/json"}

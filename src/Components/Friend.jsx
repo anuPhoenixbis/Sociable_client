@@ -21,7 +21,7 @@ const Friend = ({
 
   const patchFriend = async()=>{
     try {
-        const response = await fetch(`http://localhost:3000/users/${_id}/${friendId}`,{
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${_id}/${friendId}`,{
             method: "PATCH",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -47,7 +47,7 @@ const Friend = ({
     <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
             <img
-                src={`http://localhost:3000/assets/${userPicturePath}`}
+                src={`${import.meta.env.VITE_API_BASE_URL}/assets/${userPicturePath}`}
                 alt="user"
                 className="rounded-full h-12 w-12 object-cover cursor-pointer"
                 onClick={()=>{

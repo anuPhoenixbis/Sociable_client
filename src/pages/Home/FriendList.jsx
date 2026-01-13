@@ -9,7 +9,7 @@ const FriendList = () => {
   
   useEffect(() => {
     const getFriends = async () => {
-      const response = await fetch(`http://localhost:3000/users/${_id}/friends`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${_id}/friends`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
