@@ -48,6 +48,7 @@ const Feed = ({user, isProfile=false}) => {
         }else getPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dispatch])
+    // console.log(posts)
 
   return (
     <div className="space-y-4">
@@ -55,33 +56,36 @@ const Feed = ({user, isProfile=false}) => {
       {isProfile ? null : <CreatePost picturePath={picturePath}/>}
       {/* posts */}
       {/* {console.log("Redux posts:", posts)} */}
-      {posts && posts[0].map(({
-        _id,
-        userId,
-        firstName,
-        lastName,
-        description,
-        location,
-        picturePath,
-        userPicturePath,
-        likes,
-        comments
-      })=>(
-        <div className='mt-10'>
-          <PostCard
-            key={_id}
-            postId={_id}
-            postUserId={userId}
-            name={`${firstName} ${lastName}`}
-            description={description}
-            location={location}
-            picturePath={picturePath}
-            userPicturePath={userPicturePath}
-            likes={likes}
-            comments={comments}
+      {posts && posts.length > 0 && posts.map((post)=>{
+        const {
+            _id,
+            userId,
+            firstName,
+            lastName,
+            description,
+            picturePath,
+            userPicturePath,
+            location,
+            likes,
+            comments
+        } = post;
+        
+        return (
+            <div className='mt-10' key={_id}>
+                <PostCard
+                    postId={_id}
+                    postUserId={userId}
+                    name={`${firstName} ${lastName}`}
+                    description={description}
+                    location={location}
+                    picturePath={picturePath}
+                    userPicturePath={userPicturePath}
+                    likes={likes}
+                    comments={comments}
                 />
-        </div>
-      ))}
+            </div>
+        )
+    })}
     </div>
   );
 };

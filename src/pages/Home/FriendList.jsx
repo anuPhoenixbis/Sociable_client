@@ -1,44 +1,39 @@
 import Friend from "../../Components/Friend.jsx";
-
 import {useSelector} from 'react-redux'
+import {useEffect, useState} from 'react'
 
-// FriendList.jsx
 const FriendList = () => {
-  const posts = useSelector((state)=> state.posts);
+  const [friends, setFriends] = useState([]);
   const { _id } = useSelector((state)=> state.user);
-  // get friends from posts data
-  const friendsData = posts && posts[0].map(({
-    userId,
-    firstName,
-    lastName,
-    location,
-    userPicturePath
-  }) => ({
-    userId,
-    name: `${firstName} ${lastName}`,
-    location,
-    userPicturePath
-  }));
+  const token = useSelector((state)=> state.token);
+  
+  useEffect(() => {
+    const getFriends = async () => {
+      const response = await fetch(`http://localhost:3000/users/${_id}/friends`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      setFriends(data);
+    };
+    
+    if(_id && token) getFriends();
+  }, [_id, token]);
 
-// Remove duplicate friends by userId
-    const uniqueFriends = friendsData ? [...new Set(friendsData.map(f => f.userId))].map(id => 
-      friendsData.find(f => f.userId === id)
-    ) : [];
-    const filteredFriends = uniqueFriends?.filter(friend => friend.userId !== _id);//exclude self
-    return (
+  return (
     <ul className="list bg-base-300 rounded-box shadow-md">
-      {filteredFriends && filteredFriends.map((friend)=>{
-        return(
-          <li className="list-row">
-            <Friend
-                friendId={friend.userId}
-                name={friend.name}
-                subtitle={friend.location}
-                userPicturePath={friend.userPicturePath}
-                />
-          </li>
-        )
-      })}
+      {friends && friends.map((friend)=>(
+        <li className="list-row" key={friend._id}>
+          <Friend
+            friendId={friend._id}
+            name={`${friend.firstName} ${friend.lastName}`}
+            subtitle={friend.location}
+            userPicturePath={friend.picturePath}
+          />
+        </li>
+      ))}
     </ul>
   );
 };
